@@ -128,7 +128,11 @@ def main():
                                     # else:
                                     #     print("\t\t\t\t\tInvalid Choice.Please use short codes")
                                     password=password.strip() 
-                                    
+                                    if site_name == "" or user_name == "" or password == "":
+                                        print("\t\t\t\t\tFAILED TO CREATE AND SAVE CREDENTIALS:Please fill in all details")
+                                       
+                                    else:
+                                        s_creds(create_creds(site_name,user_name,password))
                         
 
                     
