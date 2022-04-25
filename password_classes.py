@@ -24,13 +24,13 @@ class User:
         User.userList.remove(self)
 
     @classmethod
-    def aunthenticate(cls,username):
+    def authenticate(cls,username,password):
         '''
         method to check if user exists in users
         '''  
         active_user = ""
         for user in User.userList:
-            if (user.username == username ):
+            if (user.username == username and user.password == password):
                 active_user = user.username
                 
         return active_user

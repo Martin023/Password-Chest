@@ -31,11 +31,11 @@ def display_users():
     '''
     return User.display_users()
 
-def auth(name):
+def auth(name,password):
     '''
     method to check if a uer already exists in the users list
     '''
-    return User.aunthenticate(name)
+    return User.authenticate(name,password)
 
 
 
@@ -53,7 +53,7 @@ def main():
                     print("-"*10)
                     print ("User name ....")
                     u_name = input()
-                    print("Last name ...")
+                    print("password ...")
                     pass_name = input()
                     
                     save_user(create_user(u_name,pass_name)) # create and save new user
@@ -75,9 +75,10 @@ def main():
 
                 print("Enter username.....")
                 search_user_name = input()
-                user = auth(search_user_name)
+                search_user_pass = input()
+                user = auth(search_user_name,search_user_pass)
                 if search_user_name==user:
-                        print("Sucessful ...")
+                        print(f"\t\t\t\t\tHello, {search_user_name}.Proceed to select a short code to navigate")
                 else:
                         print("That user does not exist")
                         create_user()
