@@ -68,7 +68,13 @@ class Credentials:
         return a list of all credentials 
         '''
         return cls.credential_items
+
+    def remove_cred(self):
+        '''
+        method to remove credential
     
+        '''
+        Credentials.credential_items.remove(self) 
       
     
     

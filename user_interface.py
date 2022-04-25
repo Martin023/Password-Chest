@@ -40,6 +40,7 @@ def auth(name,password):
     return User.authenticate(name,password)
 
 
+
 ##Credentials section
 
 def create_credential(sitename,siteusername,sitepassword):
@@ -67,7 +68,11 @@ def disp_creds():
     method to display a list of credentials
     '''
     return Credentials.display_creds()
-
+def remove_cred(cred):
+    '''
+    method to delete a credential
+    '''
+    return cred.remove_cred()
 
 def main():
     print("Hello Welcome to your Password_Chest. What is your name?")
@@ -190,7 +195,29 @@ def main():
                                 else:
                                     print("\n")
                                     print("\t No details available")
-                                    print("\n") 
+                                    print("\n")
+
+                            elif menu_choice == 'rm':
+                                print("\n")
+                                print("\tEnter the name of the account you wan't to delete")
+                                account_name = input("\tAccount Name:").strip()
+                                print("\n")
+
+                                if search_creds(account_name):
+                                    account = search_creds(account_name)
+                                    remove_cred(account)
+                                    if disp_creds():
+                                        for cred in disp_creds():
+                                            print("\tRemaing Accounts......")
+
+                                            print(f"\t{cred.site_name}\t{cred.username}\t{cred.password}")
+
+                                    else:
+                                        print("\t\t\t\t\tNo accounts remaining")
+                               
+                        
+                            
+                             
                             
                         
                        
