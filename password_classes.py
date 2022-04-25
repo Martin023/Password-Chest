@@ -1,4 +1,8 @@
-class Users:
+
+
+
+
+class User:
     userList=[]
     
     def __init__(self,username,password):
@@ -6,22 +10,43 @@ class Users:
         self.password=password
 
     def save_user(self):
-        newuser=input("Enter username: ")
-        newpassword=input("Enter password: ")
-        self.new_user =Users(newuser,newpassword)
-        Users.userList.append(self)
-        print("You will be redirected into the app")
-        exit()
-        
-class Credentials(Users):
+        '''
+        instance method user to save the user
+        save user in user_list
+        '''  
+        User.userList.append(self)
+      
+      
+    '''
+    remove users in user_list
+    '''   
+    def remove_user(self):
+        User.userList.remove(self)
 
-    def loginValidation():
-        user=input("Enter username: ")
-        password=input("Enter password: ")
-        if user==new_user.username and password == new_user.password:
-            print("Success")
-        else:
-            print("No")
+    @classmethod
+    def aunthenticate(cls,username):
+        '''
+        method to check if user exists in users
+        '''  
+        active_user = ""
+        for user in User.userList:
+            if (user.username == username ):
+                active_user = user.username
+                
+        return active_user
+        
+        
+        
+# class Credentials:
+    
+#     def loginValidation():
+#         user=input("Enter username: ")
+#         password=input("Enter password: ")
+        
+#         if user==Users.new_user and password == Users.new_user.password:
+#             print("Success")
+#         else:
+#             print("No")
 
 
     
