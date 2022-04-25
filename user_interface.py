@@ -1,5 +1,7 @@
 from password_classes import User
 
+##Users Section
+
 def create_user(user_name,password):
     '''
     Function to create a new user
@@ -37,6 +39,21 @@ def auth(name,password):
     '''
     return User.authenticate(name,password)
 
+
+##Credentials section
+
+def create_credential(sitename,siteusername,sitepassword):
+    '''
+    Function to create a new credential
+    '''
+    new_credential = User(sitename,siteusername,sitepassword)
+    return new_credential
+
+def save_credentials(credential):
+    '''
+    Function to save credential
+    '''
+    credential.save_creds()
 
 
 def main():
@@ -132,7 +149,7 @@ def main():
                                         print("\t\t\t\t\tFAILED TO CREATE AND SAVE CREDENTIALS:Please fill in all details")
                                        
                                     else:
-                                        s_creds(create_creds(site_name,user_name,password))
+                                        save_credentials(create_credential(social_media_site_name,choose_user_name,password))
                         
 
                     

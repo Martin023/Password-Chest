@@ -38,6 +38,27 @@ class User:
         
         
 class Credentials:
+    '''
+    Class that generates new instances of details
+    and stores our credentials
+    '''
+    credential_items=[]
+    def __init__(self, social_sitename,social_siteusername,social_sitepassword) :
+        self.social_sitename=social_sitename
+        self.social_siteusername=social_siteusername
+        self.social_sitepassword=social_sitepassword
+
+    def save_creds(self):
+        '''
+        method to save a credential
+        '''
+        Credentials.credential_items.append(self)
+        
+    
+    
+    
+      
+    
     
 
     
