@@ -47,8 +47,8 @@ def login():
 	while True:
 		
 		# Register page
-		print("\t\t\tCreate new account or login to exising account:  \nCreate account --> cc / CC \nLogin --> ll / LL")
-		choice = input().lower
+		print("\t\t\tCreate new account or login to exising account: \n\n\n Create account :  cc / CC \n\n Login : ll / LL")
+		choice = input().lower()
 		if choice == "cc":
 			print("Create new username")
 			newusername = input().lower()
@@ -147,7 +147,7 @@ def login():
 
 
 
-					elif choice2 == '2':
+					elif menuOpt == '2':
 						while True:
     
 							print(" Here's a list of accounts saved")
@@ -156,7 +156,7 @@ def login():
 									print(f"Account Name:{account.accountname}")
 									print(f"Password:{account.accountpassword}")
 									print("\n")
-									print("-"*100)
+									print("+"*100)
 							else:
 								print("Oops! no accounts found!")
 							print("Back to Main menu y/n")
@@ -170,7 +170,7 @@ def login():
 								print("Enter a valid option")
 								
 					  
-					elif choice2 == '3':
+					elif menuOpt == '3':
 						print("\n")
 						print("-"*100)
 						print("Search account by name")
@@ -181,7 +181,7 @@ def login():
 							print(f"Account name: {searchaccount.accountname}")
 						else: print("That Account does not exist")
 					# delete
-					elif choice2 == '4':
+					elif menuOpt == '4':
     					
 						print("DELETING AN  ACCOUNT ??")
 						print("Search account by name")
@@ -218,8 +218,10 @@ def login():
 			existingpassword = input()
 
 			if existingusername != "person" or existingpassword != "11111":
-				print("Incorrect! Account username is person & password is 11111")
+				print("Seems you do not have an account please create one first try again or press Ctrl+z to start again")
+                
 				print("\n")
+                
 				print("Enter your username")
 				existingusername = input()
 				print("Enter your password")
@@ -338,9 +340,9 @@ def login():
 							print("-"*100)
 
 					
-					else:
-						print("Invalid choice! Choose from the options below!")
-						continue
+		else:
+			print("Invalid choice please choose Login or create account")
+			continue
    
 if __name__ == "__main__":
 	login()
