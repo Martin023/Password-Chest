@@ -54,8 +54,20 @@ class Credentials:
         '''
         Credentials.credential_items.append(self)
         
-    
-    
+    @classmethod
+    def search_cred(cls,site_name):
+        '''
+        search for credential by name
+        '''
+        for cred in cls.creds_list:
+            if cred.social_sitename == site_name:
+                return cred
+    @classmethod
+    def display_creds(cls):
+        '''
+        return a list of all credentials 
+        '''
+        return cls.credential_items
     
       
     

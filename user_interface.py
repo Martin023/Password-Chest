@@ -1,4 +1,4 @@
-from password_classes import User
+from password_classes import Credentials, User
 
 ##Users Section
 
@@ -55,6 +55,19 @@ def save_credentials(credential):
     '''
     credential.save_creds()
 
+def search_creds(name):
+    '''
+    method to search for a credential by name
+    '''
+    return Credentials.search_cred(name)
+
+
+def disp_creds():
+    '''
+    method to display a list of credentials
+    '''
+    return Credentials.display_creds()
+
 
 def main():
     print("Hello Welcome to your Password_Chest. What is your name?")
@@ -102,9 +115,9 @@ def main():
                             print("\t\t\t\t"+"*"*50)
                             print("\t\t\t\t"+"*"*50)
                             print('\n')
-                            print("\t\t\t\t\tND  - create an a new Details")
-                            print("\t\t\t\t\tdc - display credentials")
-                            print("\t\t\t\t\tfc - find credential")
+                            print("ND  - create an a new Details")
+                            print("DC - display credentials")
+                            print("FD - search credentials")
                             print("\t\t\t\t\trm - remove credential")
                             print("\t\t\t\t\tup - update credential")
                             print("\t\t\t\t\tcp - copy credential")
@@ -113,9 +126,9 @@ def main():
                             print("\t\t\t\t"+"*"*50)
                             print("\t\t\t\t"+"*"*50)
                     
-                            shortcode = input("\t\t\t\t\tShortcode:").lower().strip()
+                            menu_choice = input("\t\t\t\t\tShortcode:").lower().strip()
                             print("\n")
-                            if shortcode == 'nd':
+                            if menu_choice == 'nd':
                                 # create a new details
                                 print("\t\t\t\t\tEnter details ")
                                 social_media_site_name = input("\t\t\t\t\tSocial site Name:").strip()
@@ -145,18 +158,50 @@ def main():
                                     # else:
                                     #     print("\t\t\t\t\tInvalid Choice.Please use short codes")
                                     password=password.strip() 
-                                    if site_name == "" or user_name == "" or password == "":
-                                        print("\t\t\t\t\tFAILED TO CREATE AND SAVE CREDENTIALS:Please fill in all details")
+                                    if social_media_site_name == "" or choose_user_name == "" or password == "":
+                                        print("One or more fields is empty")
                                        
                                     else:
                                         save_credentials(create_credential(social_media_site_name,choose_user_name,password))
+                            elif menu_choice == 'fd':
+                                print("\tEnter the name of the account you want to find")
+                                print("\n")
+                                account_name = input("\tAccount Name:").strip()
+                                print("\n")
+
+                                if search_creds(account_name):
+                                    account = search_creds(account_name)
+                                    print("\tAccount\tUsername\tPassword")
+                                    
+                                    print(f"\t{account.site_name}\t{account.username}\t{account.password}")
+
+
+                                else:
+                                    print("\tAccount not found")
+                                
+                    
+                            
+                            elif menu_choice == 'dc':
+                                if disp_creds():
+                                    for cred in disp_creds(): 
+                                        print(f"{cred.social_sitename}\t{cred.username}\t{cred.password}")
+                                        print("\n")
+
+                                else:
+                                    print("\n")
+                                    print("\t No details available")
+                                    print("\n") 
+                            
                         
+                       
+                            
+                      
 
                     
                 else:
                         print("That user does not exist")
                         create_user("","")
-            elif short_code == "ex":
+            elif menu_choice == "ex":
                     print("Bye .......")
                     break
             else:
