@@ -59,7 +59,7 @@ class Credentials:
         '''
         search for credential by name
         '''
-        for cred in cls.creds_list:
+        for cred in cls.credential_items:
             if cred.social_sitename == site_name:
                 return cred
     @classmethod

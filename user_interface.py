@@ -173,7 +173,7 @@ def main():
                                     account = search_creds(account_name)
                                     print("\tAccount\tUsername\tPassword")
                                     
-                                    print(f"\t{account.site_name}\t{account.username}\t{account.password}")
+                                    print(f"\t{account.social_sitename}\t{account.social_siteusername}\t{account.social_sitepassword}")
 
 
                                 else:
@@ -184,7 +184,7 @@ def main():
                             elif menu_choice == 'dc':
                                 if disp_creds():
                                     for cred in disp_creds(): 
-                                        print(f"{cred.social_sitename}\t{cred.username}\t{cred.password}")
+                                        print(f"{cred.social_sitename}\t{cred.social_siteusername}\t{cred.social_sitepassword}")
                                         print("\n")
 
                                 else:
