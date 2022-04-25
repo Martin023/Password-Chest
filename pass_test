@@ -9,7 +9,27 @@ class TestUser(unittest.TestCase):
         """SetUp method is run before each test case"""
         self.new_user = User("Twitter", "mypassword")
 
+    import unittest
+from user import User
+
+
+class TestUser(unittest.TestCase):
+    """Test class that defines test cases for the user class"""
+
+    def setUp(self):
+        """SetUp method is run before each test case"""
+        self.new_user = User("Twitter", "mypassword")
+
+    def test_init(self):
+        """  proper user initialization text """
+        self.assertEqual(self.new_user.username, "Martin")
+        self.assertEqual(self.new_user.password, "pass")
+
     
+
+if __name__ == '__main__':
+    unittest.main()
+
 
 
 if __name__ == '__main__':
