@@ -37,17 +37,8 @@ class User:
         
         
         
-# class Credentials:
+class Credentials:
     
-#     def loginValidation():
-#         user=input("Enter username: ")
-#         password=input("Enter password: ")
-        
-#         if user==Users.new_user and password == Users.new_user.password:
-#             print("Success")
-#         else:
-#             print("No")
-
 
     
     

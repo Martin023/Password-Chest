@@ -40,7 +40,7 @@ def auth(name,password):
 
 
 def main():
-    print("Hello Welcome to your contact list. What is your name?")
+    print("Hello Welcome to your Password_Chest. What is your name?")
     uname = input()
 
     print(f"Hello {uname}. what would you like to do?")
@@ -49,16 +49,16 @@ def main():
             print("Use these short codes : nu - create a new user, du - display users, lg - login ex -exit the password-chest ")
             short_code = input().lower()
             if short_code == 'nu':
-                    print("New Contact")
+                    print("\n New User :")
                     print("-"*10)
                     print ("User name ....")
                     u_name = input()
-                    print("password ...")
+                    print(" Create password ...")
                     pass_name = input()
                     
                     save_user(create_user(u_name,pass_name)) # create and save new user
                     print ('\n')
-                    print(f"New User {u_name} {pass_name} created")
+                    print(f"New User :{u_name} with password  :{pass_name} created")
                     print ('\n')
             elif short_code == 'du':
                     if display_users():
@@ -75,13 +75,66 @@ def main():
 
                 print("Enter username.....")
                 search_user_name = input()
+                print("Enter password.....")
                 search_user_pass = input()
                 user = auth(search_user_name,search_user_pass)
                 if search_user_name==user:
                         print(f"\t\t\t\t\tHello, {search_user_name}.Proceed to select a short code to navigate")
+
+                        while True:
+                            print("\t\t\t\t"+"*"*50)
+                            print("\t\t\t\t"+"*"*50)
+                            print('\n')
+                            print("\t\t\t\t\tND  - create an a new Details")
+                            print("\t\t\t\t\tdc - display credentials")
+                            print("\t\t\t\t\tfc - find credential")
+                            print("\t\t\t\t\trm - remove credential")
+                            print("\t\t\t\t\tup - update credential")
+                            print("\t\t\t\t\tcp - copy credential")
+                            print("\t\t\t\t\tex - exit app")
+                            print('\n')
+                            print("\t\t\t\t"+"*"*50)
+                            print("\t\t\t\t"+"*"*50)
+                    
+                            shortcode = input("\t\t\t\t\tShortcode:").lower().strip()
+                            print("\n")
+                            if shortcode == 'nd':
+                                # create a new details
+                                print("\t\t\t\t\tEnter details ")
+                                social_media_site_name = input("\t\t\t\t\tSocial site Name:").strip()
+                                choose_user_name = input("\t\t\t\t\tUser Name:").strip()
+                                while True:
+                                    print("\t\t\t\t\tEnter Own  - to type in your own password")
+                                    # print("\t\t\t\t\tEnter gp - to be generated password\n")
+
+
+                                    password_choice = input("\t\t\t\t\tChoice: ").lower().strip()
+
+                                    if password_choice == 'own':
+                                        password = input("\t\t\t\t\tEnter password: ")
+                                        break
+                                    # elif password_choice == 'Gen':
+                                    #     print("\t\t\t\t\tEnter the length of the password you want")
+                                    #     print("\t\t\t\t\tPassword must be between 8 and 12")
+                                    #     len=int(input("\t\t\t\t\tLength: "))
+
+                                    #     if len > 12 or len < 8:
+                                    #         print("\t\t\t\t\tlength must not be greater than 12 or less than 8")
+
+                                    #     else:
+                                    #         password = Credentials.generate_password(len)
+                                    #         print(f"\t\t\t\t\tyour password is {password}")
+                                    #         break
+                                    # else:
+                                    #     print("\t\t\t\t\tInvalid Choice.Please use short codes")
+                                    password=password.strip() 
+                                    
+                        
+
+                    
                 else:
                         print("That user does not exist")
-                        create_user()
+                        create_user("","")
             elif short_code == "ex":
                     print("Bye .......")
                     break
@@ -89,4 +142,4 @@ def main():
                     print("I really didn't get that. Please use the short codes")
 
 if __name__ == '__main__':
-        main()
+    main()
