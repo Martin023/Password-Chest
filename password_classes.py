@@ -1,83 +1,73 @@
 
-
-
-
 class User:
-    userList=[]
-    
-    def __init__(self,username,password):
-        self.username=username
-        self.password=password
+    """ Class User creates user accounts and saves their information"""
+
+    def __init__(self, username, password):
+        """
+        Method to define the properties of each object
+        """
+        self.username = username
+        self.password = password
+    userslist = []
 
     def save_user(self):
-        '''
-        instance method user to save the user
-        save user in user_list
-        '''  
-        User.userList.append(self)
-      
-      
-    '''
-    remove users in user_list
-    '''   
-    def remove_user(self):
-        User.userList.remove(self)
+        """
+       Function to save user instance
+        """
+        self.userslist.append(self)
 
-    @classmethod
-    def authenticate(cls,username,password):
-        '''
-        method to check if user exists in users
-        '''  
-        active_user = ""
-        for user in User.userList:
-            if (user.username == username and user.password == password):
-                active_user = user.username
-                
-        return active_user
-        
         
         
 class Credentials:
-    '''
-    Class that generates new instances of details
-    and stores our credentials
-    '''
-    credential_items=[]
-    def __init__(self, social_sitename,social_siteusername,social_sitepassword) :
-        self.social_sitename=social_sitename
-        self.social_siteusername=social_siteusername
-        self.social_sitepassword=social_sitepassword
+    """
+    Credentials class to create accounts for users
+    """
+    credentials_list = []
 
-    def save_creds(self):
-        '''
-        method to save a credential
-        '''
-        Credentials.credential_items.append(self)
-        
+    def __init__(self, accountname, accountpassword):
+        """
+        Method that defines the properties of each object
+        """
+        self.accountname = accountname
+        self.accountpassword = accountpassword
+
+  
+
+
+    def save_account(self):
+        """
+        Function to save the new objects created in this case -accounts
+        """
+        self.credentials_list.append(self)
+
+    def delete_account(self):
+        """
+        Function to delete the accounts saved
+        """
+        Credentials.credentials_list.remove(self)
+
     @classmethod
-    def search_cred(cls,site_name):
-        '''
-        search for credential by name
-        '''
-        for cred in cls.credential_items:
-            if cred.social_sitename == site_name:
-                return cred
+    def find_account_by_name(cls, accountname):
+        """
+        class method that takes in an account name and returns it if found
+        """
+        for credential in cls.credentials_list:
+            if credential.accountname == accountname:
+                return credential
+
     @classmethod
-    def display_creds(cls):
-        '''
-        return a list of all credentials 
-        '''
-        return cls.credential_items
+    def credential_exists(cls, name):
+        """
+        class method to check if a credential exists
+        """
+        for credential in cls.credentials_list:
+            if credential.accountname == name:
+                return True
+        return False
 
-    def remove_cred(self):
-        '''
-        method to remove credential
-    
-        '''
-        Credentials.credential_items.remove(self) 
-      
-    
-    
-
-    
-    
+    @classmethod
+    def display_account(cls):
+        """
+        Class method to display all accounts saved
+        """
+        return cls.credentials_list

@@ -1,238 +1,346 @@
-from password_classes import Credentials, User
+# imports for generating random passwords,and Credentials class
 
-##Users Section
-
-def create_user(user_name,password):
-    '''
-    Function to create a new user
-    '''
-    new_user = User(user_name,password)
-    return new_user
-
-def save_user(user):
-    '''
-    Function to save user
-    '''
-    user.save_user()
-
-def del_user(user):
-    '''
-    Function to delete a user
-    '''
-    user.delete_user()
-
-def find_user(username):
-    '''
-    Function that finds a contact by number and returns the contact
-    '''
-    return User.find_by_uname(username)
-
-def display_users():
-    '''
-    Function that returns all the saved contacts
-    '''
-    return User.display_users()
-
-def auth(name,password):
-    '''
-    method to check if a uer already exists in the users list
-    '''
-    return User.authenticate(name,password)
+import secrets
+import string
+from password_classes import Credentials,User
 
 
 
-##Credentials section
-
-def create_credential(sitename,siteusername,sitepassword):
-    '''
-    Function to create a new credential
-    '''
-    new_credential = User(sitename,siteusername,sitepassword)
-    return new_credential
-
-def save_credentials(credential):
-    '''
-    Function to save credential
-    '''
-    credential.save_creds()
-
-def search_creds(name):
-    '''
-    method to search for a credential by name
-    '''
-    return Credentials.search_cred(name)
+def create_new_account(accountname, accountpassword):
+	""" Function to create a new account and the accountname & accountpassword"""
+	new_credential = Credentials(accountname, accountpassword)
+	return new_credential
 
 
-def disp_creds():
-    '''
-    method to display a list of credentials
-    '''
-    return Credentials.display_creds()
-def remove_cred(cred):
-    '''
-    method to delete a credential
-    '''
-    return cred.remove_cred()
+def save_new_account(credentials):
+	"""Function to save all the account details """
+	credentials.save_account()
 
-def main():
-    print("Hello Welcome to your Password_Chest. What is your name?")
-    uname = input()
+def check_existing_account(name):
+    """ Function to check if an account with the exact searched account name exists"""
+    
+    return Credentials.find_account_by_name(name)
 
-    print(f"Hello {uname}. what would you like to do?")
-    print('\n')
-    while True:
-            print("Use these short codes : nu - create a new user, du - display users, lg - login ex -exit the password-chest ")
-            short_code = input().lower()
-            if short_code == 'nu':
-                    print("\n New User :")
-                    print("-"*10)
-                    print ("User name ....")
-                    u_name = input()
-                    print(" Create password ...")
-                    pass_name = input()
-                    
-                    save_user(create_user(u_name,pass_name)) # create and save new user
-                    print ('\n')
-                    print(f"New User :{u_name} with password  :{pass_name} created")
-                    print ('\n')
-            elif short_code == 'du':
-                    if display_users():
-                            print("Here is a list of all pass-chest users")
-                            print('\n')
-                            for user in display_users():
-                                    print(f"{user.first_name} ")
-                            print('\n')
-                    else:
-                            print('\n')
-                            print("No users currently using Pass-chest")
-                            print('\n')
-            elif short_code == 'lg':
+def delete_account(credentials):
+    
+    """ Function to delete an account together with the accountpassword"""
+    
+    return Credentials.delete_account(credentials)
 
-                print("Enter username.....")
-                search_user_name = input()
-                print("Enter password.....")
-                search_user_pass = input()
-                user = auth(search_user_name,search_user_pass)
-                if search_user_name==user:
-                        print(f"\t\t\t\t\tHello, {search_user_name}.Proceed to select a short code to navigate")
+def find_account(accountname):
+	""" Function to find an account by name"""
+	return Credentials.find_account_by_name(accountname)
 
-                        while True:
-                            print("\t\t\t\t"+"*"*50)
-                            print("\t\t\t\t"+"*"*50)
-                            print('\n')
-                            print("ND  - create an a new Details")
-                            print("DC - display credentials")
-                            print("FD - search credentials")
-                            print("\t\t\t\t\trm - remove credential")
-                            print("\t\t\t\t\tup - update credential")
-                            print("\t\t\t\t\tcp - copy credential")
-                            print("\t\t\t\t\tex - exit app")
-                            print('\n')
-                            print("\t\t\t\t"+"*"*50)
-                            print("\t\t\t\t"+"*"*50)
-                    
-                            menu_choice = input("\t\t\t\t\tShortcode:").lower().strip()
-                            print("\n")
-                            if menu_choice == 'nd':
-                                # create a new details
-                                print("\t\t\t\t\tEnter details ")
-                                social_media_site_name = input("\t\t\t\t\tSocial site Name:").strip()
-                                choose_user_name = input("\t\t\t\t\tUser Name:").strip()
-                                while True:
-                                    print("\t\t\t\t\tEnter Own  - to type in your own password")
-                                    # print("\t\t\t\t\tEnter gp - to be generated password\n")
+def display_account():
+    """Function to display all accounts saved"""
+    return Credentials.display_account()
+
+def delete_account(credentials):
+	"""Function to delete all accounts saved"""
+	return Credentials.delete_account(credentials)
 
 
-                                    password_choice = input("\t\t\t\t\tChoice: ").lower().strip()
+def login():
 
-                                    if password_choice == 'own':
-                                        password = input("\t\t\t\t\tEnter password: ")
-                                        break
-                                    # elif password_choice == 'Gen':
-                                    #     print("\t\t\t\t\tEnter the length of the password you want")
-                                    #     print("\t\t\t\t\tPassword must be between 8 and 12")
-                                    #     len=int(input("\t\t\t\t\tLength: "))
+	print("Welcome to Pass-Chest")
+	print("\n")
+	while True:
+		
+		# Register page
+		print("\t\t\tCreate new account or login to exising account:  \nCreate account --> cc / CC \nLogin --> ll / LL")
+		choice = input().lower
+		if choice == "cc":
+			print("Create new username")
+			newusername = input().lower()
 
-                                    #     if len > 12 or len < 8:
-                                    #         print("\t\t\t\t\tlength must not be greater than 12 or less than 8")
+			print("Enter your password")
+			newpassword = input()
 
-                                    #     else:
-                                    #         password = Credentials.generate_password(len)
-                                    #         print(f"\t\t\t\t\tyour password is {password}")
-                                    #         break
-                                    # else:
-                                    #     print("\t\t\t\t\tInvalid Choice.Please use short codes")
-                                    password=password.strip() 
-                                    if social_media_site_name == "" or choose_user_name == "" or password == "":
-                                        print("One or more fields is empty")
-                                       
-                                    else:
-                                        save_credentials(create_credential(social_media_site_name,choose_user_name,password))
-                            elif menu_choice == 'fd':
-                                print("\tEnter the name of the account you want to find")
-                                print("\n")
-                                account_name = input("\tAccount Name:").strip()
-                                print("\n")
+			print("Re-enter password")
+			confirmpassword = input()
 
-                                if search_creds(account_name):
-                                    account = search_creds(account_name)
-                                    print("\tAccount\tUsername\tPassword")
-                                    
-                                    print(f"\t{account.social_sitename}\t{account.social_siteusername}\t{account.social_sitepassword}")
+			while confirmpassword != newpassword:
+				print("Oops! Passwords do not match!")
+
+				print("Enter your password")
+				newpassword = input()
+
+				print("Confirm your password")
+				confirmpassword = input()
+
+				print("\n")
+			else:
+				print(f"\t\t Welcome {newusername} to password the tresure")
+				print(f"Your login details are Username: {newusername} \nPassword: {newpassword}")
+				print("\n")
+				print("++" *100)
+				print("Login")
+				print("Enter your Username")
+				loginUsername = input().lower()
+				print("Enter your password")
+				loginPassword = input()
+			  
+				##Verify users:
+
+				if loginUsername != newusername or loginPassword != newpassword:
+					print("incorrect password or username")
+					print("\n")
+					print("Enter your Username")
+					loginUsername =input().lower()
+					print("\nEnter your password")
+					loginPassword = input()
+					
+				else:
+					print(f"\t\t Welcome back, {loginUsername}! ")
+					print("\n")
+					print("++"*100)
+					print("Welcome to password Chest")
+					print("Choose options 1,2,3,4 or 5")
+					
+
+				while True:
+					print("\n \t\t MENU :")
+                   
+					print("\t\t 1. Add new Account")
+					print("\t\t 2. View saved accounts")
+					print("\t\t 3. Search saved accounts")
+					print("\t\t 4. Delete saved accounts")
+					
+					menuOpt = input()
+
+					if menuOpt == '1':
+						while True:
+							print("-"*100)
+							print("Add account? y / n")
+							choice3 = input()
+
+							if choice3 == 'y':
+								print("Enter account name")
+								accountname = input()
+									# print("Enter your Username")
+									# loginUsername =input()
+								print("Would you like to enter your password or generate one? en :enter/ a :atomatic generated")
+								password = input().lower()
+								if password == "en":
+									accountpassword = input()
+										# print("Enter your password")
+								
+									print("Succesfull creation of account")
+									print(f"Account name: {accountname} \nPassword: {accountpassword}")  
+									save_new_account(create_new_account(accountname, accountpassword))                          
+								elif password == "a":
+									letters = string.ascii_lowercase + string.digits + string.punctuation
+									accountpassword = ''.join(secrets.choice(letters) for i in range(1,10))
+									print("Success! You have created a new account. See details below.")
+									print(f"Account name: {accountname} \nPassword: {accountpassword}")  
+									print("\n")
+									save_new_account(create_new_account(accountname, accountpassword))
+								else:
+									print("Invalid! Please enter Valid choice")
+									print("\n")
+									
+									
+							elif choice3 == 'n':
+								break
+							else:
+								print("Use either y or n")
 
 
-                                else:
-                                    print("\tAccount not found")
-                                
-                    
-                            
-                            elif menu_choice == 'dc':
-                                if disp_creds():
-                                    for cred in disp_creds(): 
-                                        print(f"{cred.social_sitename}\t{cred.social_siteusername}\t{cred.social_sitepassword}")
-                                        print("\n")
 
-                                else:
-                                    print("\n")
-                                    print("\t No details available")
-                                    print("\n")
+					elif choice2 == '2':
+						while True:
+    
+							print(" Here's a list of accounts saved")
+							if display_account():
+								for account in display_account():
+									print(f"Account Name:{account.accountname}")
+									print(f"Password:{account.accountpassword}")
+									print("\n")
+									print("-"*100)
+							else:
+								print("Oops! no accounts found!")
+							print("Back to Main menu y/n")
+							option = input().lower()
+							if option == "y":
+								break
 
-                            elif menu_choice == 'rm':
-                                print("\n")
-                                print("\tEnter the name of the account you wan't to delete")
-                                account_name = input("\tAccount Name:").strip()
-                                print("\n")
+							elif option == "n":
+								continue
+							else:
+								print("Enter a valid option")
+								
+					  
+					elif choice2 == '3':
+						print("\n")
+						print("-"*100)
+						print("Search account by name")
+						option1 = input()
+						if check_existing_account(option1):
+							searchaccount = find_account(option1)
+							print("Account Found!")
+							print(f"Account name: {searchaccount.accountname}")
+						else: print("That Account does not exist")
+					# delete
+					elif choice2 == '4':
+    					
+						print("DELETING AN  ACCOUNT ??")
+						print("Search account by name")
+						option2 = input()
+						if check_existing_account(option2):
+							searchaccount = find_account(option2)
+							print("Account Found!")
+							print(f"Account name: {searchaccount.accountname}")
+							print(f"Are you sure you want to delete {searchaccount.accountname} y/n")
+							option3 = input()
+							if option3 == 'y':
+								delete_account(searchaccount)
+								print("Account Deleted!")
+								print("\n")
+								print("-"*100)
+							elif option3 == 'n':
+								continue
+							else:
+								print("Choose y/n")
+						else: 
+							print("That Account does not exist")
+							print("-"*100)
 
-                                if search_creds(account_name):
-                                    account = search_creds(account_name)
-                                    remove_cred(account)
-                                    if disp_creds():
-                                        for cred in disp_creds():
-                                            print("\tRemaing Accounts......")
+					
+					else:
+						print("Invalid choice! Choose from the options below!")
+						continue
 
-                                            print(f"\t{cred.site_name}\t{cred.username}\t{cred.password}")
+		elif choice == "ll":
+			print("Enter your username")
+			existingusername = input().lower
 
-                                    else:
-                                        print("\t\t\t\t\tNo accounts remaining")
-                               
-                        
-                            
-                             
-                            
-                        
-                       
-                            
-                      
+			print("Enter your password")
+			existingpassword = input()
 
-                    
-                else:
-                        print("That user does not exist")
-                        create_user("","")
-            elif menu_choice == "ex":
-                    print("Bye .......")
-                    break
-            else:
-                    print("I really didn't get that. Please use the short codes")
+			if existingusername != "person" or existingpassword != "11111":
+				print("Incorrect! Account username is person & password is 11111")
+				print("\n")
+				print("Enter your username")
+				existingusername = input()
+				print("Enter your password")
+				existingpassword = input()
 
-if __name__ == '__main__':
-    main()
+			elif existingusername == "person" and existingpassword == "11111":
+				print("\n")
+				print("You have successfully logged in ")
+				print("-"*100)
+				print("Select an option below")
+
+			while True:
+					print("\n")
+					print("1.Add new Account")
+					print("2.View saved accounts")
+					print("3.Search saved accounts")
+					print("4.Delete saved accounts")
+					
+					choice2 = input()
+
+					if choice2 == '1':
+						while True:
+							print("-"*100)
+							print("Add account? y/n")
+							choice3 = input()
+
+							if choice3 == 'y':
+								print("Enter account name")
+								accountname = input()
+									# print("Enter your Username")
+									# loginUsername =input()
+								print("Would you like to enter your password or generate one? E/G")
+								password = input()
+								if password == "E":
+									accountpassword = input()
+										# print("Enter your password")
+								
+									print("Success! You have created a new account. See details below.")
+									print(f"Account name: {accountname} \nPassword: {accountpassword}")  
+									save_new_account(create_new_account(accountname, accountpassword))                          
+								elif password == "G":
+									letters = string.ascii_lowercase + string.digits + string.punctuation
+									accountpassword = ''.join(secrets.choice(letters) for i in range(1,10))
+									print("Success! You have created a new account. See details below.")
+									print(f"Account name: {accountname} \nPassword: {accountpassword}")  
+									print("\n")
+									save_new_account(create_new_account(accountname, accountpassword))
+								else:
+									print("Invalid! Please enter Valid choice")
+									print("\n")
+									print("-"*100)
+									
+							elif choice3 == 'n':
+								break
+							else:
+								print("Use either y: for Yes  or n: For NO")
+
+
+
+					elif choice2 == '2':
+						while True:
+    
+							print("\t \t Currently saved accounts are: ")
+							if display_account():
+								for account in display_account():
+									print(f"Account Name:{account.accountname}")
+									print(f"Password:{account.accountpassword}")
+									print("\n")
+									print("-"*100)
+							else:
+								print("Oops!Seems you have no accounts yet!")
+							print("Back to Main menu y/n")
+							option = input().lower()
+							if option == "y":
+								break
+
+							elif option == "n":
+								continue
+							else:
+								print("Enter a valid option")
+								
+					  
+					elif choice2 == '3':
+						print("\n")
+						print("-"*100)
+						print("Search account by name")
+						option1 = input()
+						if check_existing_account(option1):
+							searchaccount = find_account(option1)
+							print("Account Found!")
+							print(f"Account name: {searchaccount.accountname}")
+						else: print("That Account does not exist")
+					# delete
+					elif choice2 == '4':
+    					
+						print("THIS OPTION WILL DELETE ALL YOUR ACCOUNT")
+						print("Search account by name")
+						option2 = input()
+						if check_existing_account(option2):
+							searchaccount = find_account(option2)
+							print("Account Found!")
+							print(f"Account name: {searchaccount.accountname}")
+							print(f"Are you sure you want to delete {searchaccount.accountname} y/n")
+							option3 = input()
+							if option3 == 'y':
+								delete_account(searchaccount)
+								print("Account Deleted!")
+								print("\n")
+								print("-"*100)
+							elif option3 == 'n':
+								continue
+							else:
+								print("Choose y/n")
+						else: 
+							print("That Account does not exist")
+							print("-"*100)
+
+					
+					else:
+						print("Invalid choice! Choose from the options below!")
+						continue
+   
+if __name__ == "__main__":
+	login()
